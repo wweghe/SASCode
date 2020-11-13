@@ -1,3 +1,3 @@
 proc freq data=sashelp.cars ;
- tables cylinders ;
+ tables origin cylinders ;
 run;
