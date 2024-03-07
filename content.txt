@@ -1,2 +1,33 @@
 
-Test
+
+proc freq data=sashelp.cars ;
+ tables cylinders ;
+run;
+
+data test1;
+	set sashelp.iris;
+	do i = 1 to 1000000;
+		output;
+	end;
+run;
+
+lsof +L1 | grep CAS_DISK_CACHE | awk "{ total += \$7 }; END { print total}"
+
+watch -n 10 -d -t "sudo lsof +L1 | grep casmap | wc -l"
+watch -n 10 -d -t "sudo lsof +L1 | grep casmap | awk \"{ total += \\\$7 }; END { print total}\""
+
+
+watch "kubectl -n viya401 get pods -o wide |grep folders"
+kubectl -n viya401 edit hpa sas-folders
+	1 1 -> 2 5
+
+for (( ; ; )); do date ; curl -s http://`hostname`/folders/apiMeta/build/ | jq '.buildVersion' ; done
+
+docker run --rm \
+  --group-add root \
+  --user $(id -u):$(id -g) \
+  --volume /home/azureuser/deployments:/data \
+  --volume /home/azureuser/viya4-deployment/my-vars.yaml:/config/config \
+  --volume /home/azureuser/viya4-iac-azure/terraform.tfstate:/config/tfstate \
+  --volume /home/azureuser/.ssh/id_rsa:/config/jump_svr_private_key \
+  viya4-deployment --tags "baseline,install"
