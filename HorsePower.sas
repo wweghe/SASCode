@@ -3,7 +3,7 @@ by make;
 run;
 
 data horsepower;
-set sashelp.cars(where=(cylinders <= 12)) nobs=numobs;
+set sashelp.cars(where=(cylinders <= 10)) nobs=numobs;
 /*  set sashelp.cars nobs=numobs; */
 	format dollarsPerHorse dollar12.2 runningAveragehorsePower 6.1;
 	retain runninghorses;
