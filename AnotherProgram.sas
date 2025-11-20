@@ -1,1 +1,2 @@
-﻿proc setinit ; run ;
+/* Yet Another one */
+proc setinit ; run ;
